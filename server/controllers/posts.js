@@ -1,43 +1,66 @@
-import express from 'express';
 import mongoose from 'mongoose';
 import PostProduct from '../models/postProduct.js';
 
-const router = express.Router();
-
-export const getPosts = async (req, res) => { 
-    const { brand, ram } = req.query;
+export const getPosts = async (req, res) => {
+    const { brand, ram, type, screen, storage, charger, isPromotion, price } = req.query;
     let filter = {};
-
+    
     if (brand) filter.brand = brand;
+    if (type) filter.type = type;
     if (ram) filter.ram = ram;
+    if (screen) filter.screen = screen;
+    if (storage) filter.storage = storage;
+    if (charger) filter.charger = charger;
+    if (isPromotion) filter.isPromotion = isPromotion;
+
+    if (price) {
+        const priceFilter = {};
+        switch (price) {
+            case 'below4':
+                priceFilter.$lte = 4000000;
+                break;
+            case '4to10':
+                priceFilter.$gte = 4000000;
+                priceFilter.$lte = 10000000;
+                break;
+            case '10to20':
+                priceFilter.$gte = 10000000;
+                priceFilter.$lte = 20000000;
+                break;
+            case 'above20':
+                priceFilter.$gte = 20000000;
+                break;
+            default:
+                break;
+        }
+        filter.salePrice = priceFilter;
+    }
+
+    console.log('Filter:', filter); // Log bộ lọc để kiểm tra
 
     try {
         const postProducts = await PostProduct.find(filter);
+        console.log('PostProducts:', postProducts); // Log kết quả truy vấn để kiểm tra
         res.status(200).json(postProducts);
     } catch (error) {
+        console.error('Error fetching posts:', error.message); // Log lỗi để kiểm tra
         res.status(404).json({ message: error.message });
     }
 }
 
-export default router;
+export const getIdPosts = async (req, res) => {
+    const { id } = req.params;
 
-// import PostProduct from '../models/postProduct.js';
+    try {
+        const postDetailProduct = await PostProduct.findById(id);
 
-// export const getPosts = async (req, res) => { 
-//     try {
-//         const postProducts = await PostProduct.find({brand: "iPhone"});
-//         res.status(200).json(postProducts);
-//     } catch (error) {
-//         res.status(404).json({ message: error.message });
-//     }
-// }
+        if (!postDetailProduct) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
 
-// export const getSamsungPosts = async (req, res) => {
-//     try {
-//         const postSamsung = await PostProduct.find({
-//             brand: "SAMSUNG"});
-//         res.status(200).json(postSamsung);
-//     } catch (error) {
-//         res.status(404).json({ message: error.message });
-//     }
-// }
+        res.status(200).json(postDetailProduct);
+    } catch (error) {
+        console.error('Error fetching post by ID:', error.message); // Log lỗi để kiểm tra
+        res.status(404).json({ message: 'Invalid ObjectId' });
+    }
+}

@@ -1,14 +1,12 @@
 import DealsLayout from '@/components/layout/DealsLayout';
-import { prosTest } from '@/datas/data';
 
-const FlashSaleDeals = () => {
-    console.log('prosTest:', prosTest);
+const FlashSaleDeals = ({ dataRandom2 }) => {
     return (
         <DealsLayout
             image={'/image/flashsaledeals.png'}
             btn={false}
             promo={false}
-            dealsList={prosTest}
+            dealsList={dataRandom2}
             background={'bg-[#D91D03]'}
             bgImage={'none'}
             moreInfo={true}

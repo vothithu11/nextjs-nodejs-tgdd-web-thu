@@ -7,7 +7,16 @@ import Footer from '@/components/footer/Footer';
 import FlashSaleDeals from '@/sections/Deals/FlashSaleDeals/FlashSaleDeals';
 import PromotionDeals from '@/sections/Deals/PromotionDeals/PromotionDeals';
 
-export default function Home() {
+export default async function Home() {
+    const res = await fetch('http://localhost:5000/posts');
+    const data = await res.json();
+    const res2 = await fetch('http://localhost:5000/posts?isPromotion=true');
+    const data2 = await res2.json();
+    const dataRandom = data.slice(0, 10);
+    const randomStart = Math.floor(Math.random() * 10);
+    const dataRandom2 = data2.slice(randomStart, randomStart + 10);
+    console.log('check radom data2:', dataRandom2);
+
     return (
         <main className="relative bg-[#f3efef]">
             <Header />
@@ -15,10 +24,10 @@ export default function Home() {
                 <Banner />
             </section>
             <section className="padding">
-                <FlashSaleDeals />
+                <FlashSaleDeals dataRandom2={dataRandom2 || []} />
             </section>
             <section className="padding">
-                <PromotionDeals />
+                <PromotionDeals dataRandom={dataRandom || []} />
             </section>
             <section className="padding">
                 <CateFuture />

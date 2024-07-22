@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Promo from '@/sections/Promo';
-import ProductCard from '../ProductCard/ProductCard';
+import ProductCard from '../productCard/ProductCard';
 import Button from '../button/Button';
 
 function DealsLayout({ dealsList, image, promo, btn, background, bgImage, moreInfo }) {

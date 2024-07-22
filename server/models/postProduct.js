@@ -14,20 +14,23 @@ import mongoose from 'mongoose';
     
 // })
 const postSchema = mongoose.Schema({
-    title: String,
-    originalPrice: Number,
-    salePrice: Number,
-    isPromotion: Boolean,
-    promotionPercent: Number,
-    ram: String,
-    storage: String,
-    camera: String,
-    battery: String,
-    charger: String,
-    rate: Number,
-    screen: String,
+    ram: Number,
+    battery: Number,
+    camera: Number,
+    charger: Number,
+    desc: String,
     image: String,
-    desc: String
+    isPromotion: Boolean,
+    originalPrice: Number,
+    promotionPercent: Number,
+    rate: Number,
+    salePrice: Number,
+    screen: String,
+    storage: Number,
+    title: String,
+    brand: String,
+    category: String,
+    type: String
     
 })
 

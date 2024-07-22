@@ -3,19 +3,19 @@ import Footer from '../footer/Footer';
 import BannerSlider from '../BannerSlider';
 import CategoriesLayout from './CategoriesLayout';
 
-const ProductsLayout = ({ filterData, children }) => {
+const ProductsLayout = ({ filterData, children, onSelectFeature, resetFilters }) => {
     return (
-        <main className="relative bg-[#f3efef]">
+        <main className="relative">
             <Header />
-            <section className="padding">
+            <section className="padding mt-4 pb-8">
                 <BannerSlider />
             </section>
-            <section className="padding mt-10">
-                <CategoriesLayout filterData={filterData} />
+            <section className="padding mt-10 ">
+                <CategoriesLayout filterData={filterData} onSelect={onSelectFeature} resetFilters={resetFilters} />
             </section>
             <section className="padding">{children}</section>
 
-            <section className="bg-slate-50">
+            <section className="bg-slate-50 border-t-2 mt-11">
                 <Footer />
             </section>
         </main>

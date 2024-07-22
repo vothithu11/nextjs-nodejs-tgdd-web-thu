@@ -1,12 +1,34 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortDown } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
 
-const ProductButtonFeature = ({ placeholder }) => {
+const ProductButtonFeature = ({ filter, onSelect, resetFilters }) => {
+    const [selectedValue, setSelectedValue] = useState('');
+
+    useEffect(() => {
+        setSelectedValue('');
+    }, [resetFilters]);
+
+    const handleClick = (event) => {
+        const selectedValue = event.target.value;
+        setSelectedValue(selectedValue);
+        onSelect({ [filter.queryName]: selectedValue });
+    };
+
     return (
-        <div className="center p-2 m-2 border-2 rounded-md text-xs ">
-            <span className="p-0 m-0">{placeholder}</span>
-            <FontAwesomeIcon icon={faSortDown} className="" />
-        </div>
+        <select
+            id={filter.queryName}
+            className="center-x py-1.5 px-0.5 m-2 border-2 rounded-md text-xs cursor-pointer"
+            onChange={handleClick}
+            value={selectedValue}
+        >
+            <option value="" className="">
+                {filter.placeholder}
+            </option>
+            {filter.items.map((item) => (
+                <option value={item.value} key={item.value}>
+                    {item.name}
+                </option>
+            ))}
+        </select>
     );
 };
 
