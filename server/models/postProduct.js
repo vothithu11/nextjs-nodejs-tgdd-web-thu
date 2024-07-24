@@ -1,18 +1,5 @@
 import mongoose from 'mongoose';
 
-// const postSchema = mongoose.Schema({
-//     title: String,
-//     originalPrice: Number,
-//     salePrice: Number,
-//     image: String,
-//     isPromotion: Boolean,
-//     promotionPercent: Number,
-//     category: {
-//         name: String,
-//         id: Number, 
-//     }
-    
-// })
 const postSchema = mongoose.Schema({
     ram: Number,
     battery: Number,

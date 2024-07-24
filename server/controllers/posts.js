@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import PostProduct from '../models/postProduct.js';
 
 export const getPosts = async (req, res) => {
-    const { brand, ram, type, screen, storage, charger, isPromotion, price } = req.query;
+    const { brand, ram, type, screen, storage, charger, isPromotion, price, keyword } = req.query;
     let filter = {};
     
     if (brand) filter.brand = brand;
@@ -35,15 +35,18 @@ export const getPosts = async (req, res) => {
         }
         filter.salePrice = priceFilter;
     }
+    if (keyword) {
+        filter.title = { $regex: new RegExp(keyword, 'i') };
+    }
 
-    console.log('Filter:', filter); // Log bộ lọc để kiểm tra
+    console.log('Filter:', filter); 
 
     try {
         const postProducts = await PostProduct.find(filter);
-        console.log('PostProducts:', postProducts); // Log kết quả truy vấn để kiểm tra
+        console.log('PostProducts:', postProducts); 
         res.status(200).json(postProducts);
     } catch (error) {
-        console.error('Error fetching posts:', error.message); // Log lỗi để kiểm tra
+        console.error('Error fetching posts:', error.message); 
         res.status(404).json({ message: error.message });
     }
 }
@@ -60,7 +63,7 @@ export const getIdPosts = async (req, res) => {
 
         res.status(200).json(postDetailProduct);
     } catch (error) {
-        console.error('Error fetching post by ID:', error.message); // Log lỗi để kiểm tra
+        console.error('Error fetching post by ID:', error.message);
         res.status(404).json({ message: 'Invalid ObjectId' });
     }
 }

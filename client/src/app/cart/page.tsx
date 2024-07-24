@@ -4,23 +4,41 @@ import ProductCounter from '@/components/counter/ProductCounter';
 import { FormatPrice } from '@/datas/covertData';
 
 const CartPage = () => {
-    const { value, product } = useSelector((state) => state.counter);
+    const { value, products } = useSelector((state) => state.counter);
+
+    const totalCost = products.reduce((acc, product) => {
+        return acc + product.salePrice * product.quantity;
+    }, 0);
 
     return (
-        <div className="">
-            <h1 className="text-[#288AD6] font-bold text-xl center-x p-8">Giỏ hàng của bạn</h1>
-            {product ? (
-                <div key={product._id} className="grid grid-cols-3 border-b-2 mx-[30%] p-2 center shadow-xl">
-                    <img src={product.image} alt={product.name} width="100px" />
-                    <div className="space-y-2 ">
-                        <h2>{product.title}</h2>
-                        <p>Giá: {FormatPrice(product.salePrice)} đ</p>
+        <div className="shadow-xl p-4 mx-20 space-y-8 max-lg:mx-2 lg:mx-10">
+            <h1 className="text-[#288AD6] font-bold text-xl center-x">Giỏ hàng của bạn</h1>
+            {products.length > 0 ? (
+                products.map((product) => (
+                    <div
+                        key={product._id}
+                        className="grid grid-cols-3 border-b-2 mx-[30%] lg:mx-[30%] p-2 center  max-lg:mx-2 max-lg:grid max-lg:grid-cols-2 max-lg:items-center "
+                    >
+                        <img src={product.image} alt={product.title} width="100px" className="" />
+                        <div className="space-y-2 max-lg:px-2 max-lg:text-base">
+                            <h2>{product.title}</h2>
+                            <p className="">
+                                {FormatPrice(product.salePrice)} <span>đ</span>
+                            </p>
+                        </div>
+                        <ProductCounter product={product} />
                     </div>
-                    <ProductCounter />
-                </div>
+                ))
             ) : (
-                <p>Giỏ hàng của bạn trống</p>
+                <p className="flex justify-center ">Giỏ hàng của bạn trống</p>
             )}
+
+            <p className="flex justify-center font-semibold text-xl max-lg:text-base  max-lg:font-bold">
+                Tổng tiền:
+                <span className="text-red-600 font-bold ml-4 max-lg:text:base  max-lg:font-bold">
+                    {FormatPrice(totalCost)}đ
+                </span>
+            </p>
         </div>
     );
 };

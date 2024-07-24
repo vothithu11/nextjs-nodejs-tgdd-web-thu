@@ -10,7 +10,7 @@ const ProductsLayout = ({ filterData, children, onSelectFeature, resetFilters })
             <section className="padding mt-4 pb-8">
                 <BannerSlider />
             </section>
-            <section className="padding mt-10 ">
+            <section className="padding mt-10 max-lg:mt-2">
                 <CategoriesLayout filterData={filterData} onSelect={onSelectFeature} resetFilters={resetFilters} />
             </section>
             <section className="padding">{children}</section>

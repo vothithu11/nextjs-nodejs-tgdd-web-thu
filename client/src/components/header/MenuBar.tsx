@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 function MenuBar({ menuBar }) {
     return (
-        <section className="py-8 w-full h-11">
+        <section className="py-8 w-full h-11 max-xl:hidden">
             <ul className="center text-sm">
                 {menuBar.map((menu) => (
                     <Link href={menu.link} key={menu.id} className="center space-x-3 ">

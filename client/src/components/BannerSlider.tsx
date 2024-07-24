@@ -17,7 +17,7 @@ function BannerSlider() {
     };
 
     return (
-        <div className="w-full center pb-3 space-x-2 -mb-14">
+        <div className="w-full center pb-3 space-x-2 -mb-14 max-lg:-mb-10">
             <div className="w-10 h-10 p-3 rounded-full bg-slate-200 center" onClick={prevImage}>
                 <FontAwesomeIcon icon={faChevronLeft} />
             </div>

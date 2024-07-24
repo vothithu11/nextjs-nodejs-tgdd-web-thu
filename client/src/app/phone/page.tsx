@@ -10,10 +10,11 @@ const PhoneProducts = async (props) => {
     const price = props?.searchParams.price || '';
     const res = await fetch(
         `http://localhost:5000/posts?brand=${brand}&ram=${ram}&type=${type}&screen=${screen}&storage=${storage}&charger=${charger}&price=${price}`,
+        { cache: 'no-store' },
     );
 
     const data = await res.json();
-    console.log('check data', data);
+    console.log('check data new', data);
 
     return (
         <div>

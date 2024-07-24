@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @import 'tailwind/base';
+@import 'tailwind/components';
+@import 'tailwind/utilities'; */
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +19,7 @@
 
 @layer utilities {
     .padding {
-        @apply px-40;
+        @apply px-40 max-md:px-4;
     }
     .center {
         @apply flex justify-between items-center;
@@ -33,6 +36,13 @@
         width: 222px;
     }
     .cart-btn {
-        @apply py-1.5 px-2 border-2 border-red-500 rounded-md text-sm cursor-pointer bg-[#f6f7f8] text-red-500 hover:bg-red-500 hover:text-white active:bg-red-700 active:text-white;
+        @apply py-1.5 px-2 border-2 border-red-500 rounded-md text-sm max-lg:text-xs cursor-pointer bg-[#f6f7f8] text-red-500 hover:bg-red-500 hover:text-white active:bg-red-700 active:text-white;
+    }
+}
+@media (max-width: 1024px) {
+    .bg-dynamic {
+        background-image: none;
+        height: auto;
+        width: auto;
     }
 }

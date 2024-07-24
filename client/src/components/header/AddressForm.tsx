@@ -1,5 +1,5 @@
 import Button from '../button/Button';
-import Search from '../Search';
+import Search from './SearchBar';
 import SelectAddressForm from './SelectAddressForm';
 
 function AddressForm() {

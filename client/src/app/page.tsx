@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Header from '@/components/header/Header';
 import Banner from '@/sections/Banner/Banner';
 import CateFuture from '@/sections/CateFuture/CateFuture';
@@ -9,14 +8,12 @@ import PromotionDeals from '@/sections/Deals/PromotionDeals/PromotionDeals';
 
 export default async function Home() {
     const res = await fetch('http://localhost:5000/posts');
-    const data = await res.json();
-    const res2 = await fetch('http://localhost:5000/posts?isPromotion=true');
-    const data2 = await res2.json();
-    const dataRandom = data.slice(0, 10);
-    const randomStart = Math.floor(Math.random() * 10);
-    const dataRandom2 = data2.slice(randomStart, randomStart + 10);
-    console.log('check radom data2:', dataRandom2);
-
+    const dataPost = await res.json();
+    const resPromotion = await fetch('http://localhost:5000/posts?isPromotion=true');
+    const dataPromotion = await resPromotion.json();
+    const dataPromotionRadom = dataPromotion.slice(0, 10);
+    const valueStart = Math.floor(Math.random() * 10);
+    const dataFlashSale = dataPost.slice(valueStart, valueStart + 10);
     return (
         <main className="relative bg-[#f3efef]">
             <Header />
@@ -24,12 +21,12 @@ export default async function Home() {
                 <Banner />
             </section>
             <section className="padding">
-                <FlashSaleDeals dataRandom2={dataRandom2 || []} />
+                <FlashSaleDeals dataFlashSale={dataFlashSale || []} />
             </section>
             <section className="padding">
-                <PromotionDeals dataRandom={dataRandom || []} />
+                <PromotionDeals dataPromotionRadom={dataPromotionRadom || []} />
             </section>
-            <section className="padding">
+            <section className="padding max-lg:hidden">
                 <CateFuture />
             </section>
             <section className="padding">

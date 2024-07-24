@@ -316,7 +316,4 @@ export const footerData = [
     'Gửi góp ý, khiếu nại',
     'Tìm siêu thị (3.043 shop)',
     'Tổng đài hỗ trợ',
-    'Gọi mua: 1900 232 460 (8:00 - 21:30)',
-    'Khiếu nại: 1800.1062 (8:00 - 21:30)',
-    'Bảo hành: 1900 232 464 (8:00 - 21:00)',
 ];

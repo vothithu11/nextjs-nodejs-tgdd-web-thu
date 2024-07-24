@@ -5,8 +5,8 @@ const CategoriesLayout = ({ filterData, onSelect, resetFilters }) => {
     const item1 = filterData[0].items;
 
     return (
-        <div className="bg-[#f3efef] padding-y space-y-8">
-            <div className="grid grid-cols-6 mb-2.5">
+        <div className="bg-[#f3efef] padding-y space-y-8 max-lg:space-y-2">
+            <div className="grid grid-cols-6 mb-2.5 max-lg:grid-cols-3">
                 {filterData.map((filter) => (
                     <ProductButtonFeature
                         key={filter.queryName}
@@ -16,7 +16,7 @@ const CategoriesLayout = ({ filterData, onSelect, resetFilters }) => {
                     />
                 ))}
             </div>
-            <div className="grid grid-cols-8 gap-y-2">
+            <div className="grid grid-cols-8 gap-y-2 max-lg:hidden">
                 {item1.map((filter) => (
                     <ButtonBrandName
                         filter={filter}

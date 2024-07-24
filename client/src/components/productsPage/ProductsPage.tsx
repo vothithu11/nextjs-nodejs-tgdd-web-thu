@@ -29,7 +29,7 @@ const ProductsPage = ({ data }) => {
 
     const clearFilters = () => {
         setTempParams({});
-        setResetFilters((prev) => !prev); // Toggle state to re-render
+        setResetFilters((prev) => !prev);
         router.replace(pathname);
     };
 
@@ -49,7 +49,7 @@ const ProductsPage = ({ data }) => {
                     Bỏ chọn
                 </button>
             </div>
-            <div className="grid grid-cols-5 ">
+            <div className="grid grid-cols-5 max-lg:grid-cols-3 max-md:grid-cols-2">
                 {data.map((item) => (
                     <div className="border-2 border-gray-100 hover:shadow-md" key={item._id}>
                         <ProductCard product={item} bgImage={'bg-white'} moreInfo={true} />

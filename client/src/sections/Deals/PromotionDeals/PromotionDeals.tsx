@@ -1,13 +1,12 @@
 import DealsLayout from '@/components/layout/DealsLayout';
-import { prosTest } from '@/datas/data';
 
-const PromotionDeals = ({ dataRandom }) => {
+const PromotionDeals = ({ dataPromotionRadom }) => {
     return (
         <DealsLayout
             image={'/image/promotiondeals.png'}
             btn={false}
             promo={false}
-            dealsList={dataRandom}
+            dealsList={dataPromotionRadom}
             background={'bg-[#920101]'}
             bgImage={'bg-dynamic'}
             moreInfo={true}
